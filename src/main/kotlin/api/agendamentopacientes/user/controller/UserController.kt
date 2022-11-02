@@ -28,17 +28,17 @@ class UserController {
 
     @PostMapping
     fun create(@RequestBody @Valid userRequest: PostUserRequest) {
-        userService.toSave(userRequest.toUserModel())
+        userService.create(userRequest.toUserModel())
     }
 
     @GetMapping("/{id}")
     fun findUserById(@PathVariable id: Long): UserResponse {
-        return userService.findUserById(id).toUserResponse()
+        return userService.userById(id).toUserResponse()
     }
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody @Valid userRequest: PutUserRequest) {
-        var userSaved = userService.findUserById(id)
+        var userSaved = userService.userById(id)
         userService.update(userRequest.toUserModel(userSaved),id)
     }
 

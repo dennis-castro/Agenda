@@ -6,9 +6,9 @@ import java.util.*
 
 interface UserService {
 
-    fun toSave(userModel: UserModel)
+    fun create(userModel: UserModel)
 
-    fun findUserById(id: Long):UserModel
+    fun userById(id: Long):UserModel
 
     fun update(userModel: UserModel,id: Long)
 

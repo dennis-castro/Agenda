@@ -14,4 +14,7 @@ data class PostUserRequest(
     @Email
     var email: String,
 
+    @field:NotEmpty(message = "password must be informed")
+    var password: String
+
 )

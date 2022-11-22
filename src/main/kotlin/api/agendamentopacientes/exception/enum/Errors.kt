@@ -8,6 +8,8 @@ enum class Errors(val code: String, val message: String) {
     PA101("PA-101", "User [%s] not exists"),
     PA102("PA-102", "Cannot update user with status [%s]"),
     PA103("PA-103", "E-mail already registered"),
+    PA104("PA-104","Failed to authenticate"),
+    PA105("PA-105","Token invalid"),
 
     //schedule
     PA201("PA-201", "Schedule [%s] not exists"),

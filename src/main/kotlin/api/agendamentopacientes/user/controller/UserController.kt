@@ -7,6 +7,7 @@ import api.agendamentopacientes.user.extension.toUserModel
 import api.agendamentopacientes.user.extension.toUserResponse
 import api.agendamentopacientes.user.service.UserServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -25,20 +26,20 @@ class UserController {
     @Autowired
     lateinit var userService: UserServiceImpl
 
-
     @PostMapping
     fun create(@RequestBody @Valid userRequest: PostUserRequest) {
         userService.create(userRequest.toUserModel())
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || #id == authentication.principal.id")
     fun findUserById(@PathVariable id: Long): UserResponse {
-        return userService.userById(id).toUserResponse()
+        return userService.getById(id).toUserResponse()
     }
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody @Valid userRequest: PutUserRequest) {
-        var userSaved = userService.userById(id)
+        var userSaved = userService.getById(id)
         userService.update(userRequest.toUserModel(userSaved),id)
     }
 

@@ -8,7 +8,7 @@ interface UserService {
 
     fun create(userModel: UserModel)
 
-    fun userById(id: Long):UserModel
+    fun getById(id: Long):UserModel
 
     fun update(userModel: UserModel,id: Long)
 

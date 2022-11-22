@@ -27,7 +27,7 @@ class ScheduleController {
 
     @PostMapping
     fun create(@RequestBody @Valid scheduleRequest: PostScheduleRequest) {
-        val userSaved = userService.userById(scheduleRequest.userId)
+        val userSaved = userService.getById(scheduleRequest.userId)
         scheduleService.create(scheduleRequest.toScheduleModel(userSaved))
     }
 
@@ -38,7 +38,7 @@ class ScheduleController {
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): ScheduleResponse {
-        return scheduleService.scheduleById(id).toResponse()
+        return scheduleService.getById(id).toResponse()
     }
 
     @DeleteMapping("/{id}")

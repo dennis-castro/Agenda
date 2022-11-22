@@ -1,5 +1,6 @@
 package api.agendamentopacientes.user.entity
 
+import api.agendamentopacientes.user.enum.Role
 import api.agendamentopacientes.user.enum.UserStatus
 import javax.persistence.*
 
@@ -20,6 +21,17 @@ data class UserModel(
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     var status: UserStatus = UserStatus.ACTIVE,
+
+    @Column(name="password")
+    var password: String,
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Role::class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = [JoinColumn(name = "user_id")])
+    var roles: Set<Role> = setOf()
+
+
 
 
 //    @OneToMany

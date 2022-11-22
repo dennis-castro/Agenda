@@ -25,7 +25,7 @@ class ScheduleServiceImpl:ScheduleService {
 
 
     override fun create(scheduleModel: ScheduleModel) {
-        val userSaved = userService.userById(scheduleModel.user.id!!)
+        val userSaved = userService.getById(scheduleModel.user.id!!)
 
         if (userSaved.status == UserStatus.INACTIVE) {
             throw BadRequestException(Errors.PA102.message.format(userSaved.status), Errors.PA102.code)
@@ -49,7 +49,7 @@ class ScheduleServiceImpl:ScheduleService {
     }
 
 
-    override fun scheduleById(id: Long): ScheduleModel {
+    override fun getById(id: Long): ScheduleModel {
         return scheduleRepository.findById(id)
             .orElseThrow { NotFoundException(Errors.PA201.message.format(id), Errors.PA201.code) }
     }
@@ -61,7 +61,7 @@ class ScheduleServiceImpl:ScheduleService {
 
 
     override fun delete(id: Long) {
-        scheduleById(id)
+        getById(id)
         scheduleRepository.deleteById(id)
     }
 }

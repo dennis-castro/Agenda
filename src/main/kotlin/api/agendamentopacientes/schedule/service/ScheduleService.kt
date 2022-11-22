@@ -8,7 +8,7 @@ interface ScheduleService {
 
     fun create(scheduleModel: ScheduleModel)
 
-    fun scheduleById(id: Long):ScheduleModel
+    fun getById(id: Long):ScheduleModel
 
     fun getAll(pageable: Pageable): Page<ScheduleModel>
 

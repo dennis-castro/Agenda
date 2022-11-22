@@ -9,6 +9,7 @@ fun PostUserRequest.toUserModel(): UserModel {
     return UserModel(
         name = this.name,
         email = this.email,
+        password = this.password
     )
 }
 
@@ -17,7 +18,8 @@ fun PutUserRequest.toUserModel(userSaved: UserModel): UserModel {
         id = userSaved.id,
         name = this.name ?: userSaved.name,
         email = this.email ?: userSaved.email,
-        status = userSaved.status
+        status = userSaved.status,
+        password = userSaved.password
     )
 }
 
